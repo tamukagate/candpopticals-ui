@@ -1,38 +1,36 @@
 import styled from 'styled-components';
-
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import PhoneIcon from '@mui/icons-material/Phone';
 import RoomIcon from '@mui/icons-material/Room';
 import TwitterIcon from '@mui/icons-material/Twitter';
-
 import { mobile } from '../Responsive';
 
 const Container = styled.div`
-  display: flex;
-  ${mobile({ flexDirection: 'column' })}
   background-color: #003e5c;
   color: white;
+  display: flex;
+  ${mobile({ flexDirection: 'column' })}
 `;
 const Left = styled.div`
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   padding: 20px;
 `;
 
 const Logo = styled.img`
-  cursor: default;
-  width: 40px;
-  height: 41px;
   border: 1px solid white;
+  cursor: default;
+  height: 41px;
+  width: 40px;
   ${mobile({})};
 `;
 
 const Desc = styled.p`
-  margin: 20px -1px;
   cursor: default;
+  margin: 20px -1px;
 `;
 
 const SocialContainer = styled.div`
@@ -40,16 +38,16 @@ const SocialContainer = styled.div`
 `;
 
 const SocialIcon = styled.div`
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
+  align-items: center;
+  background-color: #${(props) => props.color};
   border-radius: 50%;
   color: white;
-  background-color: #${(props) => props.color};
+  cursor: pointer;
   display: flex;
-  align-items: center;
+  height: 40px;
   justify-content: center;
   margin-right: 20px;
+  width: 40px;
 `;
 const Center = styled.div`
   flex: 1;
@@ -58,8 +56,28 @@ const Center = styled.div`
 `;
 
 const Title = styled.h3`
-  margin-bottom: 30px;
   cursor: default;
+  margin-bottom: 30px;
+`;
+
+const List = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const ListItem = styled.li`
+  margin-bottom: 20px;
+  text-decoration: underline;
+  width: 100%;
+
+  :hover {
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+  }
 `;
 
 const Right = styled.div`
@@ -69,30 +87,10 @@ const Right = styled.div`
 `;
 
 const ContactItem = styled.div`
-  margin-bottom: 20px;
-  display: flex;
   align-items: center;
   cursor: default;
-`;
-
-const List = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
   display: flex;
-  flex-wrap: wrap;
-`;
-
-const ListItem = styled.li`
-  width: 100%;
   margin-bottom: 20px;
-  text-decoration: underline;
-
-  :hover {
-    cursor: pointer;
-    width: fit-content;
-    height: fit-content;
-  }
 `;
 
 const Footer = () => {
@@ -120,7 +118,13 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
+          <ListItem
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behaviour: 'smooth' });
+            }}
+          >
+            Home
+          </ListItem>
           <ListItem>Disclaimer</ListItem>
           <ListItem>Privacy Policy</ListItem>
           <ListItem>Terms of Use</ListItem>
@@ -130,11 +134,15 @@ const Footer = () => {
         <Title>Contact</Title>
         <ContactItem>
           <RoomIcon style={{ marginRight: '10px' }} />
-          Chester House 1st Floor Suite 122, 88 Speke Avenue, Harare, Zimbabwe
+          Chester House 1st Floor Suite 122, 88 Speke Avenue
+          <br />
+          Harare, Zimbabwe
         </ContactItem>
         <ContactItem>
           <PhoneIcon style={{ marginRight: '10px' }} />
-          +263 712 801 926 | +263 712 802 217
+          Michael +263 712 801 926
+          <br />
+          McAndrew +263 712 802 217
         </ContactItem>
         <ContactItem>
           <MailOutlinedIcon style={{ marginRight: '10px' }} />

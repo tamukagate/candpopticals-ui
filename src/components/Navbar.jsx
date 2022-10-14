@@ -1,37 +1,34 @@
 import styled from 'styled-components';
-
 import { Link } from 'react-router-dom';
 import { mobile } from '../Responsive';
 
 const Container = styled.div`
+  background-color: white;
   height: 80px;
-  ${mobile({ height: 'red' })}
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: white;
+  ${mobile({ height: 'red' })}
 `;
 
 const Wrapper = styled.div`
-  padding: 20px 30px;
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: space-between;
+  padding: 20px 30px;
   ${mobile({ padding: '10px 0px' })}
 `;
 
 const Left = styled.div`
-  flex: 1;
-  display: flex;
   align-items: center;
+  display: flex;
+  flex: 1;
 `;
 
-const Language = styled.span`
-  font-size: 14px;
+const Logo = styled.img`
+  border: 0;
   cursor: pointer;
-  ${mobile({ display: 'none' })}
-  display: flex;
-  align-items: center;
+  ${mobile({})}
 `;
 
 const Center = styled.div`
@@ -39,28 +36,30 @@ const Center = styled.div`
   text-align: center;
 `;
 
-const Logo = styled.img`
-  cursor: pointer;
-  border: 0;
-  ${mobile({})}
-`;
-
 const Right = styled.div`
-  flex: 1;
-  display: flex;
   align-items: center;
+  display: flex;
+  flex: 1;
   justify-content: flex-end;
   ${mobile({ flex: '2', justifyContent: 'center' })}
 `;
 
-const Button = styled.button`
-  border: 2px solid white;
-  padding: 10px 15px;
-  background-color: #003e5c;
-  color: white;
-  font-weight: bold;
+const Language = styled.span`
+  align-items: center;
   cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  ${mobile({ display: 'none' })}
+`;
+
+const Button = styled.button`
+  background-color: #003e5c;
+  border: 2px solid white;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
   margin-left: 25px;
+  padding: 10px 15px;
 `;
 
 const Navbar = () => {
@@ -68,7 +67,12 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Link to="/">
+          <Link
+            to="/"
+            onClick={() => {
+              window.scrollTo({ behaviour: 'smooth', top: 0, left: 0 });
+            }}
+          >
             <Logo src="https://i.ibb.co/3f6V4M5/logo.png"></Logo>
           </Link>
         </Left>

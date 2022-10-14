@@ -1,9 +1,8 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import styled from 'styled-components';
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
+import { useState } from 'react';
 import { mobile } from '../Responsive';
+import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Products from '../components/Products';
@@ -16,23 +15,23 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  margin: 20px;
+  color: #003e5c;
   cursor: default;
   font-weight: bold;
-  color: #003e5c;
+  margin: 20px;
 `;
 
 const FilterContainer = styled.div`
+  background-color: #cdedff;
+  color: #003e5c;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #cdedff;
-  color: #003e5c;
 `;
 
 const Filter = styled.div`
-  margin: 20px;
   cursor: default;
+  margin: 20px;
   ${mobile({ width: '0px 20px', display: 'flex', flexDirection: 'column' })}
 `;
 
@@ -44,8 +43,8 @@ const FilterText = styled.span`
 `;
 
 const Select = styled.select`
-  padding: 10px;
   margin-right: 20px;
+  padding: 10px;
   ${mobile({ margin: '10px 0px' })}
 `;
 
@@ -78,11 +77,11 @@ const ProductList = () => {
       <Container>
         <Navbar />
         <FilterContainer>
-          <Title>{cat} frames</Title>
+          <Title>{cat.toUpperCase()} FRAMES</Title>
           <Filter>
             <FilterText>Filter Products</FilterText>
             <Select name="color" onChange={handleFilters}>
-              <Option disabled>Color</Option>
+              <Option disabled>color</Option>
               <Option>white</Option>
               <Option>black</Option>
               <Option>red</Option>
@@ -91,7 +90,7 @@ const ProductList = () => {
               <Option>green</Option>
             </Select>
             <Select name="shape" onChange={handleFilters}>
-              <Option disabled>Shape</Option>
+              <Option disabled>shape</Option>
               <Option>oval</Option>
               <Option>rectangle</Option>
               <Option>square</Option>
@@ -103,7 +102,7 @@ const ProductList = () => {
               <Option>butterfly</Option>
             </Select>
             <Select name="type" onChange={handleFilters}>
-              <Option disabled>Type</Option>
+              <Option disabled>type</Option>
               <Option>full frame</Option>
               <Option>semi-rimless</Option>
               <Option>rimless</Option>

@@ -30,30 +30,32 @@ const FilterContainer = styled.div`
 `;
 
 const Filter = styled.div`
+  ${mobile({ display: 'flex', flexDirection: 'column', width: '0px 20px' })}
   cursor: default;
   margin: 20px;
-  ${mobile({ width: '0px 20px', display: 'flex', flexDirection: 'column' })}
 `;
 
 const FilterText = styled.span`
+  ${mobile({ marginRight: '0px' })}
   font-size: 20px;
   font-weight: 600;
   margin-right: 20px;
-  ${mobile({ marginRight: '0px' })}
 `;
 
 const Select = styled.select`
+  ${mobile({ margin: '10px 0px' })}
   margin-right: 20px;
   padding: 10px;
-  ${mobile({ margin: '10px 0px' })}
 `;
 
 const Option = styled.option``;
 
 const ProductList = () => {
-  const location = useLocation();
-  const cat = location.pathname.split('/')[2];
   const [filters, setFilters] = useState({});
+
+  const location = useLocation();
+
+  const cat = location.pathname.split('/')[2];
 
   const handleFilters = (e) => {
     const value = e.target.value;
@@ -66,7 +68,7 @@ const ProductList = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Products - C&P Opticals</title>
+        <title>{cat.toUpperCase()} FRAMES - C&P OPTICALS</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
@@ -81,7 +83,7 @@ const ProductList = () => {
           <Filter>
             <FilterText>Filter Products</FilterText>
             <Select name="color" onChange={handleFilters}>
-              <Option disabled>color</Option>
+              <Option disabled>COLOR</Option>
               <Option>white</Option>
               <Option>black</Option>
               <Option>red</Option>
@@ -90,7 +92,7 @@ const ProductList = () => {
               <Option>green</Option>
             </Select>
             <Select name="shape" onChange={handleFilters}>
-              <Option disabled>shape</Option>
+              <Option disabled>SHAPE</Option>
               <Option>oval</Option>
               <Option>rectangle</Option>
               <Option>square</Option>
@@ -102,7 +104,7 @@ const ProductList = () => {
               <Option>butterfly</Option>
             </Select>
             <Select name="type" onChange={handleFilters}>
-              <Option disabled>type</Option>
+              <Option disabled>TYPE</Option>
               <Option>full frame</Option>
               <Option>semi-rimless</Option>
               <Option>rimless</Option>

@@ -1,48 +1,151 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { publicRequest } from '../requestMethods';
+import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
+import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import { mobile } from '../Responsive';
+import { publicRequest } from '../requestMethods';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import RequestQuote from '../components/RequestQuote';
 
 const Container = styled.div``;
-const Wrapper = styled.div`
-  padding: 50px;
+
+const Slider = styled.div`
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.426);
   display: flex;
-  ${mobile({ padding: '10px', flexDirection: 'column' })}
+  height: 100vh;
+  left: 0;
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  z-index: 999;
 `;
-const ImgContainer = styled.div`
-  flex: 1;
+
+const Wrapper = styled.div`
+  ${mobile({ flexDirection: 'column', padding: '10px' })}
+  display: flex;
+  padding: 50px;
 `;
-const Image = styled.img`
+
+const Close = styled.div`
+  color: lightgray;
+  cursor: pointer;
+  font-size: 30px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+`;
+
+const Arrow = styled.div`
+  align-items: center;
+  background-color: #fff7f7;
+  border-radius: 50%;
+  bottom: 0;
+  color: lightgray;
+  cursor: pointer;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  left: ${(props) => props.direction === 'left' && '10px'};
+  margin: auto;
+  opacity: 0.5;
+  position: absolute;
+  right: ${(props) => props.direction === 'right' && '10px'};
+  top: 0;
+  width: 50px;
+  z-index: 2;
+`;
+
+const SliderWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
   width: 100%;
-  height: 90vh;
-  object-fit: cover;
-  ${mobile({ height: '40vh' })}
 `;
+
+const SliderImg = styled.div`
+  height: 80%;
+  width: 80vh;
+`;
+
+const ImgContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const ImgWrapper = styled.div`
+  width: 33%;
+`;
+
+const Image = styled.img`
+  object-fit: cover;
+  width: 100%;
+`;
+
 const InfoContainer = styled.div`
+  ${mobile({ padding: '10px' })}
   flex: 1;
   padding: 0px 50px;
-  ${mobile({ padding: '10px' })}
 `;
+
 const Title = styled.h1`
+  cursor: default;
   font-weight: 200;
-  cursor: default;
 `;
+
 const Desc = styled.p`
-  margin: 20px 0px;
   cursor: default;
+  margin: 20px 0px;
 `;
 
 const Product = () => {
+  const [product, setProduct] = useState({});
+
+  const handleClick = (direction) => {
+    let newSlideNumber;
+
+    if (direction === 'left') {
+      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+    } else {
+      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+    }
+
+    setSlideNumber(newSlideNumber);
+  };
+
   const location = useLocation();
+
   const id = location.pathname.split('/')[2];
 
-  const [product, setProduct] = useState({});
+  const [slideNumber, setSlideNumber] = useState(0);
+
+  const [open, setOpen] = useState(false);
+
+  const photos = [
+    {
+      src: '',
+    },
+    {
+      src: '',
+    },
+    {
+      src: '',
+    },
+    {
+      src: '',
+    },
+    {
+      src: '',
+    },
+    {
+      src: '',
+    },
+  ];
 
   useEffect(() => {
     const getProduct = async () => {
@@ -53,10 +156,16 @@ const Product = () => {
     };
     getProduct();
   }, [id]);
+
+  const handleOpen = (i) => {
+    setSlideNumber(i);
+    setOpen(true);
+  };
+
   return (
     <HelmetProvider>
       <Helmet>
-        <title>C&P OPTICALS</title>
+        <title>{product.title.toUpperCase()} - C&P OPTICALS</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
@@ -66,9 +175,26 @@ const Product = () => {
       </Helmet>
       <Container>
         <Navbar />
+        {open && <Slider />}
+        <Close onClick={() => setOpen(false)}></Close>
+        <Arrow direction="left" onClick={() => handleClick('left')}>
+          <ArrowLeftOutlinedIcon />
+        </Arrow>
+        <SliderWrapper>
+          <SliderImg>
+            <Image src={photos[slideNumber]} alt="" />
+          </SliderImg>
+        </SliderWrapper>
+        <Arrow direction="right" onClick={() => handleClick('right')}>
+          <ArrowRightOutlinedIcon />
+        </Arrow>
         <Wrapper>
           <ImgContainer>
-            <Image src={product.img}></Image>
+            {photos.map((photo, i) => (
+              <ImgWrapper>
+                <Image onClick={() => handleOpen(i)} src={photo.src} alt="" />
+              </ImgWrapper>
+            ))}
           </ImgContainer>
           <InfoContainer>
             <Title>{product.title}</Title>

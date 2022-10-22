@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Home - C&P OPTICALS</title>
+        <title>C&P OPTICALS</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta

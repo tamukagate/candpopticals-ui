@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../Responsive';
 
@@ -8,17 +9,17 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
+  ${mobile({ flexDirection: 'column' })}
   align-items: center;
   display: flex;
   height: 100%;
   justify-content: center;
   padding: 20px;
-  ${mobile({ flexDirection: 'column' })}
 `;
 
 const FormContainer = styled.div`
-  width: 50%;
   ${mobile({ width: 'column' })}
+  width: 50%;
 `;
 
 const Title = styled.h1`
@@ -28,36 +29,36 @@ const Title = styled.h1`
 `;
 
 const Desc = styled.div`
+  ${mobile({ fontSize: '20px', textAlign: 'center' })}
   cursor: default;
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 20px;
-  ${mobile({ textAlign: 'center', fontSize: '20px' })}
 `;
 
 const Form = styled.form`
+  ${mobile({ flexDirection: 'column' })}
   align-items: center;
   display: flex;
   height: 250px;
   justify-content: flex-start;
-  ${mobile({ flexDirection: 'column' })}
 `;
 
 const LeftForm = styled.div`
+  ${mobile({ height: '50%', marginRight: '0' })}
   display: flex;
   flex: 1;
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
   margin-right: 20px;
-  ${mobile({ height: '50%', marginRight: '0' })}
 `;
 
 const Input = styled.input`
+  ${mobile({ padding: '5px' })}
   font-size: 14px;
   padding: 20px;
   width: 225px;
-  ${mobile({ padding: '5px' })}
 `;
 
 const RightForm = styled.div`
@@ -69,15 +70,16 @@ const RightForm = styled.div`
 `;
 
 const TextArea = styled.textarea`
+  ${mobile({ height: '100px', marginTop: '20px', padding: '5px' })}
   font-size: 14px;
   height: 50%;
   padding: 20px;
   resize: none;
   width: 300px;
-  ${mobile({ height: '100px', marginTop: '20px', padding: '5px' })}
 `;
 
 const Button = styled.button`
+  ${mobile({ fontSize: '14px', padding: '5px' })}
   background-color: #003e5c;
   border: none;
   color: white;
@@ -88,25 +90,32 @@ const Button = styled.button`
   justify-content: center;
   margin-bottom: 25px;
   padding: 15px;
-  ${mobile({ fontSize: '14px', padding: '5px' })}
+`;
+
+const Span = styled.span`
+  color: green;
 `;
 
 const AddressContainer = styled.div`
+  ${mobile({ marginBottom: '20px', width: '100%' })}
   align-items: center;
   display: flex;
   flex-direction: column;
   width: 50%;
-  ${mobile({ marginBottom: '20px', width: '100%' })}
 `;
 
 const RequestQuote = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <Container>
       <Wrapper>
         <FormContainer>
           <Title>Request a Quote</Title>
           <Desc>Complete the form below and we will get back to you</Desc>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <LeftForm>
               <Input placeholder="Full Name" />
               <Input placeholder="Email" />

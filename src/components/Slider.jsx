@@ -1,59 +1,57 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import React, { useState } from 'react';
-
 import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
-
-import { sliderItems } from '../data';
 import { mobile } from '../Responsive';
+import { sliderItems } from '../data';
 
 const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  overflow: hidden;
-  flex-wrap: wrap;
   ${mobile({ display: 'none' })}
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 `;
 
 const Arrow = styled.div`
-  width: 50px;
-  height: 50px;
+  align-items: center;
   background-color: #fff7f7;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
   bottom: 0;
-  left: ${(props) => props.direction === 'left' && '10px'};
-  right: ${(props) => props.direction === 'right' && '10px'};
-  margin: auto;
   cursor: pointer;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  left: ${(props) => props.direction === 'left' && '10px'};
+  margin: auto;
   opacity: 0.5;
+  position: absolute;
+  right: ${(props) => props.direction === 'right' && '10px'};
+  top: 0;
+  width: 50px;
   z-index: 2;
 `;
 
 const Wrapper = styled.div`
-  height: 100%;
   display: flex;
+  height: 100%;
   transform: translate(${(props) => props.slideIndex * -100}vw);
   transition: all 1.5s ease;
 `;
 
 const Slide = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
   align-items: center;
   background-color: #${(props) => props.bg};
+  height: 100vh;
+  display: flex;
+  width: 100vw;
 `;
 
 const ImgContainer = styled.div`
-  height: 100%;
   flex: 1;
+  height: 100%;
 `;
 
 const Image = styled.img`
@@ -66,18 +64,18 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 70px;
   color: white;
   cursor: default;
+  font-size: 70px;
 `;
 
 const Desc = styled.p`
-  margin: 50px 0px;
+  color: white;
+  cursor: default;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
-  cursor: default;
-  color: white;
+  margin: 50px 0px;
 `;
 
 const Slider = () => {
